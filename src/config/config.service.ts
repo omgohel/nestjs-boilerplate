@@ -28,7 +28,7 @@ class ConfigService {
     return mode != "DEV";
   }
 
-  public getTypeOrmConfig(): TypeOrmModuleOptions {
+  getTypeOrmConfig(): TypeOrmModuleOptions {
     return {
       type: "postgres",
       host: this.getValue("POSTGRES_HOST"),
@@ -36,10 +36,11 @@ class ConfigService {
       username: this.getValue("POSTGRES_USER"),
       password: this.getValue("POSTGRES_PASSWORD"),
       database: this.getValue("POSTGRES_DATABASE"),
-      entities: ["**/*.entity{.ts,.js}"],
+      entities: [__dirname + "/../**/*.entity.{ts,js}"],
+      migrations: [__dirname + "/../database/migration/*.{ts,js}"],
       migrationsTableName: "migration",
-      migrations: ["src/database/migration/*.ts"],
       ssl: this.isProduction(),
+      synchronize: false,
     };
   }
 }
