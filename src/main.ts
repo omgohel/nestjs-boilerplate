@@ -22,6 +22,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("docs", app, document); // Accessible at /docs
 
-  await app.listen(3000);
+  const port = 3000;
+  await app.listen(port);
+
+  console.log("\n🚀 Server is up and running!");
+  console.log(`🔗 Listening on: http://localhost:${port}`);
+  console.log("📘 Swagger docs available at: /docs");
+  console.log("✅ Database connected successfully\n");
 }
 bootstrap();
